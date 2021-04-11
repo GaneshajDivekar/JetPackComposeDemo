@@ -13,12 +13,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
@@ -29,6 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.currentTextStyle
+import androidx.ui.layout.constraintlayout.ConstraintLayout
+import androidx.ui.layout.constraintlayout.ConstraintSet
 import compose.demo.ui.theme.ComposeDemoMVVMTheme
 
 var strUserName: String = ""
@@ -49,24 +53,32 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    Card(
+    Column(
         modifier = Modifier
-            .padding(16.dp)
             .fillMaxWidth()
+            .fillMaxHeight(),
+        verticalArrangement = Arrangement.Center,
     ) {
-        Column(
+        Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(16.dp)
         ) {
-            TextFieldUserName()
-            TextFieldPassword()
-            LoginButton()
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                TextFieldUserName()
+                TextFieldPassword()
+                LoginButton()
 
+            }
         }
     }
+
 }
 
 
@@ -87,12 +99,11 @@ fun LoginButton() {
                 ).show()
             }
         },
-        colors = ButtonDefaults.textButtonColors(
-            backgroundColor = Color.Red
-        )
+        colors = ButtonDefaults.textButtonColors(backgroundColor = Color.Red)
     ) {
         Text(
             "Login",
+            color = Color.White,
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth()
